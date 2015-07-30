@@ -1,9 +1,13 @@
 package com.enjin.devection.LegendaryArmor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -17,21 +21,42 @@ public class LegendaryArmor extends JavaPlugin
 {
 	public void onEnable()
 	{
-
+		getLogger().info("Legendary Armor has been enabled successfully!");
 	}
 
 	public void onDisable()
 	{
-
+		getLogger().info("Legendary Armor has been disabled successfully!");
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
 		Player player = (Player) sender;
 
+		// Display Name: Apollos Crest (Bold Red)
+		// Enchantments:
+			// Protection 5
+			// Fire Protection 4
+			// Unbreaking 3
+			// Respiration 3
+			// Aqua Affinity 1
+			// Looting 3
+		// Design image: http://puu.sh/jiXxX/9d23ea1741.png
 		ItemStack ApolloHelm = new ItemStack(Material.DIAMOND_HELMET);
 		ItemMeta ApolloHelmMeta = (ItemMeta) ApolloHelm.getItemMeta();
-		ApolloHelmMeta.setDisplayName(ChatColor.DARK_RED + "Apollos Crest");
+		ApolloHelmMeta.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Apollos Crest");
+		ApolloHelmMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 5, false);
+		ApolloHelmMeta.addEnchant(Enchantment.PROTECTION_FIRE, 4, false);
+		ApolloHelmMeta.addEnchant(Enchantment.DURABILITY, 3, false);
+		ApolloHelmMeta.addEnchant(Enchantment.OXYGEN, 3, false);
+		ApolloHelmMeta.addEnchant(Enchantment.WATER_WORKER, 1, false);
+		ApolloHelmMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 3, false);
+		List<String> ApolloHelmLore = new ArrayList<String>();
+		ApolloHelmLore.add(ChatColor.DARK_AQUA + "Legend Helmet");
+		ApolloHelmLore.add(ChatColor.DARK_PURPLE + "#" + player.getDisplayName());
+		ApolloHelmLore.add(ChatColor.DARK_GREEN + "Infused with Night Vision");
+		//ApolloHelmLore.add(ChatColor.GREEN + );
+		ApolloHelmMeta.setLore(ApolloHelmLore);
 		ApolloHelm.setItemMeta(ApolloHelmMeta);
 
 		ItemStack AegisChestPlate = new ItemStack(Material.DIAMOND_CHESTPLATE);
